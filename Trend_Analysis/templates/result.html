@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+img{
+  cursor:zoom-in;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+  position:absolute;
+  top:100px;
+  right:60px;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
+}
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <form action='/'>
+  <button class="navbar-brand">Trend Analysis</button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</form>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">About<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <div class="row" style="position:absolute;left:5%;top:30%;width:100%;">
+    <div class="col-4">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Retail</a>
+        <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Discounted</a>
+        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">MultiLinear Regression</a>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Support Vector Regression</a>
+        <a class="list-group-item list-group-item-action" id="list-error-list" data-toggle="list" href="#list-error" role="tab" aria-controls="error">Error</a>
+        <a class="list-group-item list-group-item-action" id="list-graph-list" data-toggle="list" href="#list-graph" role="tab" aria-controls="error">Graph</a>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+            {% if result %}
+                <h2>Retail Price:{{retail}}</h2>
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+          {% if result %}
+              <h2>Discount Price:{{result}}</h2>
+          {% endif %}
+        </div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+          {% if result %}
+              <h2>Multilinear Regression:{{result1}}</h2>
+          {% endif %}
+        </div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+          {% if result %}
+              <h2>Support Vector Regression:{{result2}}</h2>
+          {% endif %}
+        </div>
+        <div class="tab-pane fade" id="list-error" role="tabpanel" aria-labelledby="list-error-list">
+          <div class='chart' style="width:80%">
+          <canvas id='barChart'></canvas>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="list-graph" role="tabpanel" aria-labelledby="list-graph-list">
+  <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+           <div class="modal-dialog modal-lg" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+               </div>
+               <div class="modal-body">
+                 <img src="" class="enlargeImageModalSource" style="width: 100%;">
+               </div>
+             </div>
+           </div>
+        </div>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" style="position:absolute;top:10px;right:20%;width:70%;">
+            <div class="carousel-item active">
+                <div class="card-deck">
+                <div class="card">
+                  <img class="card-img-top" src="static/retailvsdiscounted.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Seasonal Trend vs Price</h5>
+                    <p class="card-text">X-label:Start of Season Price</br>Y-label:End of Season (Discounted)Price</p>
+
+                  </div>
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="static/pricevdiscountedtest.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Seasonal Trend vs Price(Test)</h5>
+                    <p class="card-text">X-label:Start of Season Price</br>Y-label:End of Season (Discounted) Price</p>
+
+                  </div>
+
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="static/pricevsyear.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Average Model Fit</h5>
+                    <p class="card-text">X-label:Price</br>Y-label:Year</p>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="card-deck">
+                <div class="card">
+                  <img class="card-img-top" src="static/minvsyear.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Min Pricing</h5>
+                    <p class="card-text">X-label:Min pricing for the item</br>Y-label:Year</p>
+
+                  </div>
+
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="static/inflationvsyear.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Inflation vs Year</h5>
+                    <p class="card-text">X-label:Seasonal Price Inflation</br>Y-label:Year</p>
+
+                  </div>
+
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="static/startvsyear.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Item Prices</h5>
+                    <p class="card-text">X-label:Start of Season Price</br>Y-label:Year</p>
+
+                  </div>
+
+                </div>
+                <div class="card">
+                  <img class="card-img-top" src="static/itemvsyear.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Scaled SVR Value</h5>
+                    <p class="card-text">X-label:Item Prices</br>Y-label:Year</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <script>
+        $(function() {
+              $('img').on('click', function() {
+              $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+              $('#enlargeImageModal').modal('show');
+            });
+        });
+        </script>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'></script>
+  <script>
+  const CHART=document.getElementById('barChart');
+  Chart.defaults.global.animation.duration=200;
+  let barChart=new Chart(CHART,{
+      type:'horizontalBar',
+      data:{
+        labels:['Support Vector Regression','Multilinear Regression'],
+        datasets:[
+          {
+            label:'Algorithms',
+            borderColor:'black',
+            borderWidth:2,
+            backgroundColor:['blue','red'],
+            data:[1.3,.39]
+          }
+        ]
+      }
+      });
+</script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
