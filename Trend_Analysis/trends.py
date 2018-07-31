@@ -1,11 +1,9 @@
-import base64
 import flask
 from flask import Flask,render_template,request
 from sklearn.externals import joblib
 from scipy import misc
 from flask_bootstrap import Bootstrap
 import numpy as np
-from io import BytesIO
 import pandas as pd
 import matplotlib.pyplot as plt
 app=Flask(__name__)
