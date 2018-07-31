@@ -3,17 +3,17 @@ The Project has been implemented uisng Flask.The model had been pickled and this
 based on the data taken from HTML form.
 
 ## Environment
->$pip install virtualenv
->$virtualenv Trend_Flask
->$source Trend_flask/bin/activate
+>$pip install virtualenv<br/>
+>$virtualenv Trend_Flask<br/>
+>$source Trend_flask/bin/activate<br/>
 
 ## Installation
->$pip install Flask
->$pip install flask-bootstrap
->sklearn,numpy,pandas,scipy,matplotlib
+>$pip install Flask<br/>
+>$pip install flask-bootstrap<br/>
+>sklearn,numpy,pandas,scipy,matplotlib<br/>
 
 ## Run the application
->python trends.py
+>python trends.py<br/>
 
 ## To view your app,access this url in your browser
->http://0.0.0.0:8000/
+>http://0.0.0.0:8000/<br/>
