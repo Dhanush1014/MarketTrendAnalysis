@@ -15,5 +15,5 @@ based on the data taken from HTML form.
 ## Run the application
 >python trends.py<br/>
 
-## To view your app,access this url in your browser
+## To view the app,access this url in your browser
 >http://0.0.0.0:8000/<br/>
