@@ -3,10 +3,11 @@ The Project has been implemented uisng Flask.The model had been pickled and this
 based on the data taken from HTML form.
 
 ## Table of Contents
-  1.[Environment](#Environment)
-  2.[Installation](#Installation)
-  3.[Running](#Running)
-  4.[Documentation](#Documentation)
+
+1. [Environment](#Environment)
+2. [Installation](#Installation)
+3. [Running](#Running)
+4. [Documentation](#Documentation)
 
 ## Environment <a name="Environment"></a>
 >pip install virtualenv<br/>
