@@ -1,4 +1,4 @@
-# MarketTrendAnalysis
+# Market Trend Analysis
 The Project has been implemented uisng Flask.The model had been pickled and this pickled model is loaded to make the prediction
 based on the data taken from HTML form.
 
