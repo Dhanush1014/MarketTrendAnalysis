@@ -10,7 +10,7 @@ based on the data taken from HTML form.
 ## Installation
 >pip install Flask<br/>
 >pip install flask-bootstrap<br/>
->sklearn,numpy,pandas,scipy,matplotlib<br/>
+>pip install sklearn numpy pandas scipy matplotlib<br/>
 
 ## Run the application
 >python trends.py<br/>
